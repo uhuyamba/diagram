@@ -5,6 +5,9 @@ function initDiagram() {
   const tank1 = "F M0 0 L0 80 120 80 120 0z";
   const tank2 = "F M0 0 L0 120 50 120 50 0z";
   
+  // Updated separator geometry to match the image with diagonal internal plates
+  const separator = "F M0 0 L0 80 120 80 120 0 Z M20 10 L40 30 M30 10 L50 30 M40 10 L60 30 M50 10 L70 30 M60 10 L80 30 M70 10 L90 30 M80 10 L100 30 M20 50 L40 70 M30 50 L50 70 M40 50 L60 70 M50 50 L70 70 M60 50 L80 70 M70 50 L90 70 M80 50 L100 70";
+  
   // Updated pump geometry to match the image - vertical cylindrical pump with piston rod
   const pump1 = "F M35 0 L45 0 L45 15 L55 15 L55 65 L25 65 L25 15 L35 15 Z M30 20 L50 20 L50 60 L30 60 Z";
   
@@ -13,13 +16,189 @@ function initDiagram() {
   // Emergency pit geometry - stepped pit shape like in the image
   const emergencyPit = "F M0 0 L80 0 L80 10 L70 10 L70 20 L60 20 L60 30 L50 30 L50 40 L30 40 L30 30 L20 30 L20 20 L10 20 L10 10 L0 10 Z";
 
+  // Close pit geometry - U-shaped channel like in the provided image
+  const closePit = "F M0 0 L10 0 L10 50 L70 50 L70 0 L80 0 L80 60 L0 60 Z";
+
   // Candle flare geometry - lilin dengan api di atas
   const candleFlare = "F M35 10 L45 10 L45 70 L35 70 Z M30 70 L50 70 L50 80 L30 80 Z M37 0 L38 0 L40 5 L42 3 L43 0 L44 0 L42 8 L38 8 Z";
+
+  // Circular tank with conical bottom geometry for P-0108A
+  const circularTank = "F M40 10 A30 30 0 1 1 40 70 A30 30 0 1 1 40 10 Z M25 70 L40 85 L55 70 Z";
+
+  // Aerator pond geometry - rectangular pond with wavy top edge like foam/bubbles
+  const aeratorPond = "F M0 60 L0 50 Q5 45 10 50 Q15 55 20 50 Q25 45 30 50 Q35 55 40 50 Q45 45 50 50 Q55 55 60 50 Q65 45 70 50 Q75 55 80 50 Q85 45 90 50 Q95 55 100 50 Q105 45 110 50 Q115 55 120 50 L120 60 L120 80 L0 80 Z M20 60 L40 70 M60 60 L80 70 M100 60 L110 70 M10 70 L30 75 M50 70 L70 75 M90 70 L110 75";
 
   myDiagram = $(go.Diagram, "myDiagramDiv", {
     "undoManager.isEnabled": true,
     layout: $(go.GridLayout, { spacing: new go.Size(30, 30) }),
   });
+
+  // Aerator pond template
+  myDiagram.nodeTemplateMap.add(
+    "aeratorpond",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "black",
+          width: 120,
+          height: 80,
+          geometryString: aeratorPond,
+          fill: new go.Brush("Linear", {
+            0: "lightcyan",
+            0.2: "white", 
+            0.4: "lightblue",
+            0.6: "cyan",
+            0.8: "lightblue",
+            1: "darkblue",
+            start: go.Spot.Top,
+            end: go.Spot.Bottom,
+          }),
+        }
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Center,
+          stroke: "black",
+          font: "bold 10pt sans-serif",
+          margin: new go.Margin(0, 0, 0, 0),
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Circular tank template for P-0108A
+  myDiagram.nodeTemplateMap.add(
+    "circulartank",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "black",
+          width: 80,
+          height: 85,
+          geometryString: circularTank,
+          fill: new go.Brush("Radial", {
+            0: "lightblue",
+            0.3: "white", 
+            0.7: "lightgray",
+            1: "darkgray",
+          }),
+        }
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Bottom,
+          alignmentFocus: go.Spot.Top,
+          stroke: "black",
+          font: "bold 10pt sans-serif",
+          margin: new go.Margin(5, 0, 0, 0),
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Separator template with custom geometry
+  myDiagram.nodeTemplateMap.add(
+    "separator",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "black",
+          width: 120,
+          height: 80,
+          geometryString: separator,
+          fill: new go.Brush("Linear", {
+            0: "lightblue",
+            0.3: "white", 
+            0.7: "lightgray",
+            1: "darkgray",
+            start: go.Spot.Left,
+            end: go.Spot.Right,
+          }),
+        }
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Bottom,
+          alignmentFocus: go.Spot.Top,
+          stroke: "black",
+          font: "bold 10pt sans-serif",
+          margin: new go.Margin(5, 0, 0, 0),
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
 
   // Pump template
   myDiagram.nodeTemplateMap.add(
@@ -109,6 +288,62 @@ function initDiagram() {
           width: 80,
           height: 50,
           geometryString: emergencyPit,
+          fill: new go.Brush("Linear", {
+            0: "lightgray",
+            0.3: "white", 
+            0.7: "lightgray",
+            1: "darkgray",
+            start: go.Spot.Top,
+            end: go.Spot.Bottom,
+          }),
+        }
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Bottom,
+          alignmentFocus: go.Spot.Top,
+          stroke: "black",
+          font: "bold 10pt sans-serif",
+          margin: new go.Margin(5, 0, 0, 0),
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Close pit template - U-shaped channel
+  myDiagram.nodeTemplateMap.add(
+    "closepit",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "black",
+          width: 80,
+          height: 60,
+          geometryString: closePit,
           fill: new go.Brush("Linear", {
             0: "lightgray",
             0.3: "white", 
@@ -244,6 +479,194 @@ function initDiagram() {
     )
   );
 
+  // Metering template - smaller rectangular component
+  myDiagram.nodeTemplateMap.add(
+    "metering",
+    $(
+      go.Node,
+      "Auto",
+      { locationSpot: go.Spot.Center },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      {
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      $(
+        go.Shape,
+        "RoundedRectangle",
+        {
+          fill: "#e6f3ff",
+          strokeWidth: 2,
+          stroke: "darkblue",
+          width: 100,
+          height: 40,
+        },
+        new go.Binding("fill", "color")
+      ),
+      $(
+        go.TextBlock,
+        { 
+          margin: 4, 
+          editable: true,
+          font: "bold 9pt sans-serif",
+          stroke: "darkblue"
+        },
+        new go.Binding("text", "key").makeTwoWay()
+      )
+    )
+  );
+
+  // Shipping line template - longer horizontal component
+  myDiagram.nodeTemplateMap.add(
+    "shippingline",
+    $(
+      go.Node,
+      "Auto",
+      { locationSpot: go.Spot.Center },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      {
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      $(
+        go.Shape,
+        "RoundedRectangle",
+        {
+          fill: "#fff2e6",
+          strokeWidth: 2,
+          stroke: "darkorange",
+          width: 120,
+          height: 35,
+        },
+        new go.Binding("fill", "color")
+      ),
+      $(
+        go.TextBlock,
+        { 
+          margin: 4, 
+          editable: true,
+          font: "bold 9pt sans-serif",
+          stroke: "darkorange"
+        },
+        new go.Binding("text", "key").makeTwoWay()
+      )
+    )
+  );
+
+  // Existing canal template - wider component for canal representation
+  myDiagram.nodeTemplateMap.add(
+    "canal",
+    $(
+      go.Node,
+      "Auto",
+      { locationSpot: go.Spot.Center },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      {
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      $(
+        go.Shape,
+        "RoundedRectangle",
+        {
+          fill: "#e6f7ff",
+          strokeWidth: 2,
+          stroke: "#1890ff",
+          width: 110,
+          height: 45,
+        },
+        new go.Binding("fill", "color")
+      ),
+      $(
+        go.TextBlock,
+        { 
+          margin: 4, 
+          editable: true,
+          font: "bold 9pt sans-serif",
+          stroke: "#1890ff"
+        },
+        new go.Binding("text", "key").makeTwoWay()
+      )
+    )
+  );
+
+  // Emergency vent template - wider horizontal component
+  myDiagram.nodeTemplateMap.add(
+    "emergencyvent",
+    $(
+      go.Node,
+      "Auto",
+      { locationSpot: go.Spot.Center },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      {
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      $(
+        go.Shape,
+        "RoundedRectangle",
+        {
+          fill: "#fff0f6",
+          strokeWidth: 2,
+          stroke: "#c41e3a",
+          width: 120,
+          height: 50,
+        },
+        new go.Binding("fill", "color")
+      ),
+      $(
+        go.TextBlock,
+        { 
+          margin: 4, 
+          editable: true,
+          font: "bold 9pt sans-serif",
+          stroke: "#c41e3a"
+        },
+        new go.Binding("text", "key").makeTwoWay()
+      )
+    )
+  );
+
   // Default node template
   myDiagram.nodeTemplate = $(
     go.Node,
@@ -290,32 +713,34 @@ function initDiagram() {
     $(go.Shape, { toArrow: "Standard" })
   );
 
-  // Set the model data
+  // Set the model data - Updated P-0108A to use circular tank category
   myDiagram.model = new go.GraphLinksModel(
     [
       { "key": "Pit Pump 1", "category": "pump", "pos": "250 -80", "info": "Pompa pit untuk mengangkat fluida dari sumur dalam" },
       { "key": "Pit Pump 2", "category": "pump", "pos": "350 -80", "info": "Pompa pit untuk mengangkat fluida dari sumur dalam" },
-      { "key": "Pit Pump 3", "category": "pump", "pos": "350 -80", "info": "Pompa pit untuk mengangkat fluida dari sumur dalam" },
+      { "key": "Pit Pump 3", "category": "pump", "pos": "450 -80", "info": "Pompa pit untuk mengangkat fluida dari sumur dalam" },
+      { "key": "Close Pit", "category": "closepit", "pos": "450 -80", "info": "Saluran berbentuk U untuk drainase atau penampungan" },
       { key: "Emergency Pit 1", category: "emergencypit", pos: "150 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "Emergency Pit 2", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "Water Spreader", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "PWPT-01", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "PWPT-02", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "PWPT-05A", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "PWPT-05B", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "Pre Wetland 1B&2B", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "Wetland 1B,2B,3B&4B", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "Pre Wetland 1A", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
-      { key: "Wetland 1A,2A,3A&4A", category: "emergencypit", pos: "450 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
+      { key: "Emergency Pit 2", category: "emergencypit", pos: "550 -80", info: "Sumur darurat dengan struktur bertingkat untuk menampung fluida" },
+      { key: "P-0108A", category: "circulartank", pos: "550 -80", info: "Tangki bulat dengan dasar kerucut untuk settling dan clarification" },
+      { key: "Water Spreader", category: "emergencypit", pos: "650 -80", info: "Penyebar air untuk distribusi merata" },
+      { key: "PWPT-01", category: "emergencypit", pos: "750 -80", info: "Process Water Pit Tank 01" },
+      { key: "PWPT-02", category: "emergencypit", pos: "850 -80", info: "Process Water Pit Tank 02" },
+      { key: "PWPT-05A", category: "emergencypit", pos: "950 -80", info: "Process Water Pit Tank 05A" },
+      { key: "PWPT-05B", category: "emergencypit", pos: "1050 -80", info: "Process Water Pit Tank 05B" },
+      { key: "Pre Wetland 1B&2B", category: "emergencypit", pos: "1150 -80", info: "Pre wetland untuk treatment awal 1B dan 2B" },
+      { key: "Wetland 1B,2B,3B&4B", category: "emergencypit", pos: "1250 -80", info: "Wetland untuk treatment biologis 1B-4B" },
+      { key: "Pre Wetland 1A", category: "emergencypit", pos: "1350 -80", info: "Pre wetland untuk treatment awal 1A" },
+      { key: "PWTP 5C", category: "aeratorpond", pos: "1550 -80", info: "Aerator Pond PWTP 5C untuk aerasi dan treatment biologis air" },
       { key: "Gas Boot I", category: "tank", tankType: tank2, pos: "250 -200" },
       { key: "Gas Boot II", category: "tank", tankType: tank2, pos: "350 -200" },
       { key: "Recycle Tank", category: "tank", tankType: tank1, pos: "100 0" },
-      { key: "Separator 1", category: "tank", tankType: tank1, pos: "200 0" },
-      { key: "Separator 2", category: "tank", tankType: tank1, pos: "300 0" },
-      { key: "Separator 3", category: "tank", tankType: tank1, pos: "400 0" },
-      { key: "Separator 4", category: "tank", tankType: tank1, pos: "500 0" },
-      { key: "Separator 5", category: "tank", tankType: tank1, pos: "600 0" },
-      { key: "Separator 6", category: "tank", tankType: tank1, pos: "700 0" },
+      { key: "Separator 1", category: "separator", pos: "200 0", info: "Separator dengan plat internal diagonal untuk pemisahan fase" },
+      { key: "Separator 2", category: "separator", pos: "300 0", info: "Separator dengan plat internal diagonal untuk pemisahan fase" },
+      { key: "Separator 3", category: "separator", pos: "400 0", info: "Separator dengan plat internal diagonal untuk pemisahan fase" },
+      { key: "Separator 4", category: "separator", pos: "500 0", info: "Separator dengan plat internal diagonal untuk pemisahan fase" },
+      { key: "Separator 5", category: "separator", pos: "600 0", info: "Separator dengan plat internal diagonal untuk pemisahan fase" },
+      { key: "Separator 6", category: "separator", pos: "700 0", info: "Separator dengan plat internal diagonal untuk pemisahan fase" },
       {
         key: "Wash Tank I",
         category: "tank",
@@ -343,12 +768,13 @@ function initDiagram() {
         tankType: tank1,
         pos: "600 100",
       },
-      { key: "Pompa-0201", color: "#f9f9f9", pos: "100 200" },
-      { key: "Metering w-0201", color: "#f9f9f9", pos: "250 200" },
-      { key: "Shipping Line", color: "#f9f9f9", pos: "400 200" },
-      { key: "Existing Canal", color: "#f9f9f9", pos: "400 200" },
-      { key: "Gas Plant", color: "#f9f9f9", pos: "550 200" },
-      { key: "Emergency Vent", color: "#dddddd", pos: "300 -300" },
+      { key: "P-0201", color: "#f9f9f9", pos: "100 200" },
+      { key: "Metering w-0201", category: "metering", pos: "250 200", info: "Unit metering untuk pengukuran flow rate air" },
+      { key: "Shipping Line", category: "shippingline", pos: "400 200", info: "Jalur pengiriman produk ke storage atau transport" },
+      { key: "Existing Canal", category: "canal", pos: "550 200", info: "Kanal yang sudah ada untuk drainase atau transport air" },
+      { key: "Seal Tank", color: "#f9f9f9", pos: "700 200" },
+      { key: "Gas Plant", color: "#f9f9f9", pos: "850 200" },
+      { key: "Emergency Vent", category: "emergencyvent", pos: "300 -300", info: "Ventilasi darurat untuk pelepasan tekanan berlebih" },
       { key: "Ko Drum", color: "#eeeeee", pos: "500 -200" },
       { key: "Flare", category: "candleflare", pos: "650 -200", info: "Flare berbentuk lilin untuk membakar gas berlebih" },
     ],
@@ -366,8 +792,11 @@ function initDiagram() {
       { from: "Wash Tank II", to: "Shipping Tank" },
       { from: "Shipping Tank", to: "Pompa-0201" },
       { from: "Wash Tank I", to: "Ko Drum" },
-      { from: "Seal Tank", to: "River Stack" },
-      { from: "Ko Drum", to: "River Stack" },
+      { from: "Seal Tank", to: "Gas Plant" },
+      { from: "Ko Drum", to: "Flare" },
+      { from: "Pompa-0201", to: "Metering w-0201" },
+      { from: "Metering w-0201", to: "Shipping Line" },
+      { from: "Shipping Line", to: "Existing Canal" },
     ]
   );
 }
