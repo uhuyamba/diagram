@@ -1,47 +1,47 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\obj\\Debug\\net8.0\\compressed\\aszt6pb3zc.gz",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\obj\\Debug\\net8.0\\compressed\\00j3uxougx.gz",
       "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\obj\\Debug\\net8.0\\scopedcss\\bundle\\PipingDiagramApp.styles.css",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\obj\\Debug\\net8.0\\scopedcss\\bundle\\PipingDiagramApp.styles.css",
       "PackagePath": "staticwebassets\\PipingDiagramApp.styles.css"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\css\\app.css",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\icon-192.png",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\icon-192.png",
       "PackagePath": "staticwebassets\\icon-192.png"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\index.html",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\sample-data\\weather.json",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\sample-data\\weather.json",
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },
     {
-      "Id": "C:\\Users\\rizky\\Documents\\PipingDiagramApp\\wwwroot\\scripts\\diagram.js",
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\scripts\\diagram.js",
       "PackagePath": "staticwebassets\\scripts\\diagram.js"
     },
     {

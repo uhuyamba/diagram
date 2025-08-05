@@ -1,15 +1,15 @@
 {
   "mainAssemblyName": "PipingDiagramApp",
   "resources": {
-    "hash": "sha256-3JluX6bH3OXKLObQruK4z3b8IV3LJwR/QrImo9iZCUA=",
+    "hash": "sha256-coDUujwn/yn05iJg2ZHg8YdV639KohrR122ZrMPaXqY=",
     "jsModuleNative": {
-      "dotnet.native.8.0.6.h5gufajc9y.js": "sha256-YU6M9+jtDVnB8/wtrgIndOstzNh778Ls8g9XnbjorSk="
+      "dotnet.native.8.0.18.yo3atmw4rl.js": "sha256-1QpKPnxEuRCElzcp+e3MrovJeAJkuzqKmRQay/6Aa08="
     },
     "jsModuleRuntime": {
-      "dotnet.runtime.8.0.6.vp9evdiohm.js": "sha256-+E96dgYQl8OrHQb4yNZ7QwNr3SZzLSP8lwKRzwSiMsw="
+      "dotnet.runtime.8.0.18.yo367l2cfr.js": "sha256-QVLJL2PFoMyGwMOZIRShe4/0TJQfK2WMqoIYdVaI+yM="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-QvXWDxAxKcwrwr5J00t53OFtgShscemIYbvFu+ry5Ug="
+      "dotnet.native.wasm": "sha256-0icL1rktur02b0t8WzUUQh+w3sa0rLR7YIla31PAEHM="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -208,10 +208,10 @@
       "mscorlib.wasm": "sha256-masKveCdoRSahF99doEQk7H3YN2wHLVIE4M/Zu8OoD8=",
       "netstandard.wasm": "sha256-z1EJOmgVhSpTopn7Tek/0P//MKGF1I3NUD/sh4oLnwY=",
       "System.Private.CoreLib.wasm": "sha256-tuIWpR30u0OoEVtv4pXZ47mEpI2AmFBIyYFPnqDZZfw=",
-      "PipingDiagramApp.wasm": "sha256-xUm2JR6w9xXRwcElQbmGfmVz6hQDqsimvL+vp65hGis="
+      "PipingDiagramApp.wasm": "sha256-aKlETYAloaIYxCZnhUUr/76Id2/sUBITzHC9uluOYiE="
     },
     "pdb": {
-      "PipingDiagramApp.pdb": "sha256-dJYdUyIYZyMEsWt4XEOAVsY8LR0MOym2eiC+9pEFZwM="
+      "PipingDiagramApp.pdb": "sha256-B9TLKx1tQOELZWpOHNPSRKUXHySa/lSgXXtE527p3Jg="
     }
   },
   "cacheBootResources": true,
