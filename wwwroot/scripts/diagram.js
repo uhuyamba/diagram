@@ -25,15 +25,15 @@ function initDiagram() {
   // Circular tank with conical bottom geometry for P-0108A
   const circularTank = "F M40 10 A30 30 0 1 1 40 70 A30 30 0 1 1 40 10 Z M25 70 L40 85 L55 70 Z";
 
-  // Aerator pond geometry - rectangular pond with wavy top edge like foam/bubbles
-  const aeratorPond = "F M0 60 L0 50 Q5 45 10 50 Q15 55 20 50 Q25 45 30 50 Q35 55 40 50 Q45 45 50 50 Q55 55 60 50 Q65 45 70 50 Q75 55 80 50 Q85 45 90 50 Q95 55 100 50 Q105 45 110 50 Q115 55 120 50 L120 60 L120 80 L0 80 Z M20 60 L40 70 M60 60 L80 70 M100 60 L110 70 M10 70 L30 75 M50 70 L70 75 M90 70 L110 75";
+  // NEW: Aerator Pond geometry with scalloped border and internal diagonal lines
+  const aeratorPond = "F M10 0 A5 5 0 0 1 20 0 A5 5 0 0 1 30 0 A5 5 0 0 1 40 0 A5 5 0 0 1 50 0 A5 5 0 0 1 60 0 A5 5 0 0 1 70 0 A5 5 0 0 1 80 0 A5 5 0 0 1 90 0 A5 5 0 0 1 100 0 A5 5 0 0 1 110 0 L110 10 A5 5 0 0 1 110 20 A5 5 0 0 1 110 30 A5 5 0 0 1 110 40 A5 5 0 0 1 110 50 A5 5 0 0 1 110 60 L100 60 A5 5 0 0 1 90 60 A5 5 0 0 1 80 60 A5 5 0 0 1 70 60 A5 5 0 0 1 60 60 A5 5 0 0 1 50 60 A5 5 0 0 1 40 60 A5 5 0 0 1 30 60 A5 5 0 0 1 20 60 A5 5 0 0 1 10 60 L10 50 A5 5 0 0 1 10 40 A5 5 0 0 1 10 30 A5 5 0 0 1 10 20 A5 5 0 0 1 10 10 A5 5 0 0 1 10 0 Z M20 15 L40 35 M30 15 L50 35 M40 15 L60 35 M50 15 L70 35 M60 15 L80 35 M70 15 L90 35 M80 15 L100 35";
 
   myDiagram = $(go.Diagram, "myDiagramDiv", {
     "undoManager.isEnabled": true,
     layout: $(go.GridLayout, { spacing: new go.Size(30, 30) }),
   });
 
-  // Aerator pond template
+  // NEW: Aerator Pond template with scalloped border design
   myDiagram.nodeTemplateMap.add(
     "aeratorpond",
     $(
@@ -63,15 +63,13 @@ function initDiagram() {
           strokeWidth: 2,
           stroke: "black",
           width: 120,
-          height: 80,
+          height: 70,
           geometryString: aeratorPond,
           fill: new go.Brush("Linear", {
             0: "lightcyan",
-            0.2: "white", 
-            0.4: "lightblue",
-            0.6: "cyan",
-            0.8: "lightblue",
-            1: "darkblue",
+            0.3: "lightblue", 
+            0.7: "lightgray",
+            1: "darkgray",
             start: go.Spot.Top,
             end: go.Spot.Bottom,
           }),
@@ -82,8 +80,10 @@ function initDiagram() {
         {
           alignment: go.Spot.Center,
           stroke: "black",
-          font: "bold 10pt sans-serif",
-          margin: new go.Margin(0, 0, 0, 0),
+          font: "bold 9pt sans-serif",
+          wrap: go.TextBlock.WrapFit,
+          width: 100,
+          textAlign: "center",
         },
         new go.Binding("text", "key")
       )
@@ -713,7 +713,7 @@ function initDiagram() {
     $(go.Shape, { toArrow: "Standard" })
   );
 
-  // Set the model data - Updated P-0108A to use circular tank category
+  // Set the model data - Updated Aerator Pond PWTP-5C to use new aeratorpond category
   myDiagram.model = new go.GraphLinksModel(
     [
       { "key": "Pit Pump 1", "category": "pump", "pos": "250 -80", "info": "Pompa pit untuk mengangkat fluida dari sumur dalam" },
@@ -728,10 +728,11 @@ function initDiagram() {
       { key: "PWPT-02", category: "emergencypit", pos: "850 -80", info: "Process Water Pit Tank 02" },
       { key: "PWPT-05A", category: "emergencypit", pos: "950 -80", info: "Process Water Pit Tank 05A" },
       { key: "PWPT-05B", category: "emergencypit", pos: "1050 -80", info: "Process Water Pit Tank 05B" },
+      { key: "Aerator Pond PWTP-5C", category: "aeratorpond", pos: "1150 -80", info: "Aerator pond dengan sistem aerasi untuk treatment biologis air limbah" },
       { key: "Pre Wetland 1B&2B", category: "emergencypit", pos: "1150 -80", info: "Pre wetland untuk treatment awal 1B dan 2B" },
       { key: "Wetland 1B,2B,3B&4B", category: "emergencypit", pos: "1250 -80", info: "Wetland untuk treatment biologis 1B-4B" },
       { key: "Pre Wetland 1A", category: "emergencypit", pos: "1350 -80", info: "Pre wetland untuk treatment awal 1A" },
-      { key: "PWTP 5C", category: "aeratorpond", pos: "1550 -80", info: "Aerator Pond PWTP 5C untuk aerasi dan treatment biologis air" },
+      { key: "Wetland 1A,2A,3A&4A", category: "emergencypit", pos: "1450 -80", info: "Wetland untuk treatment biologis 1A-4A" },
       { key: "Gas Boot I", category: "tank", tankType: tank2, pos: "250 -200" },
       { key: "Gas Boot II", category: "tank", tankType: tank2, pos: "350 -200" },
       { key: "Recycle Tank", category: "tank", tankType: tank1, pos: "100 0" },
