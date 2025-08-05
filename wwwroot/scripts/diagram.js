@@ -13,6 +13,9 @@ function initDiagram() {
   // Emergency pit geometry - stepped pit shape like in the image
   const emergencyPit = "F M0 0 L80 0 L80 10 L70 10 L70 20 L60 20 L60 30 L50 30 L50 40 L30 40 L30 30 L20 30 L20 20 L10 20 L10 10 L0 10 Z";
 
+  // Candle flare geometry - lilin dengan api di atas
+  const candleFlare = "F M35 10 L45 10 L45 70 L35 70 Z M30 70 L50 70 L50 80 L30 80 Z M37 0 L38 0 L40 5 L42 3 L43 0 L44 0 L42 8 L38 8 Z";
+
   myDiagram = $(go.Diagram, "myDiagramDiv", {
     "undoManager.isEnabled": true,
     layout: $(go.GridLayout, { spacing: new go.Size(30, 30) }),
@@ -111,6 +114,64 @@ function initDiagram() {
             0.3: "white", 
             0.7: "lightgray",
             1: "darkgray",
+            start: go.Spot.Top,
+            end: go.Spot.Bottom,
+          }),
+        }
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Bottom,
+          alignmentFocus: go.Spot.Top,
+          stroke: "black",
+          font: "bold 10pt sans-serif",
+          margin: new go.Margin(5, 0, 0, 0),
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Candle flare template
+  myDiagram.nodeTemplateMap.add(
+    "candleflare",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          var node = obj.part;
+          if (node !== null) {
+            var data = node.data;
+            showPopup(
+              data.key || "Informasi",
+              data.info || "Tidak ada informasi."
+            );
+          }
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "black",
+          width: 50,
+          height: 80,
+          geometryString: candleFlare,
+          fill: new go.Brush("Linear", {
+            0: "orange",
+            0.1: "red",
+            0.2: "yellow",
+            0.6: "white",
+            0.8: "lightgray",
+            1: "gray",
             start: go.Spot.Top,
             end: go.Spot.Bottom,
           }),
@@ -289,7 +350,7 @@ function initDiagram() {
       { key: "Gas Plant", color: "#f9f9f9", pos: "550 200" },
       { key: "Emergency Vent", color: "#dddddd", pos: "300 -300" },
       { key: "Ko Drum", color: "#eeeeee", pos: "500 -200" },
-      { key: "River Stack", color: "#ff9933", pos: "650 -200" },
+      { key: "Flare", category: "candleflare", pos: "650 -200", info: "Flare berbentuk lilin untuk membakar gas berlebih" },
     ],
     [
       { from: "Emergency Pit 1", to: "Pit Pump 1" },
