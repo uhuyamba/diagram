@@ -13,37 +13,35 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = PipingDiagramApp
 build_property.RootNamespace = PipingDiagramApp
-build_property.ProjectDir = D:\Project Pertamina\diagram\
+build_property.ProjectDir = C:\Users\ASUS\OneDrive\Documents\Project1\diagram\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Project Pertamina\diagram
+build_property.MSBuildProjectDirectory = C:\Users\ASUS\OneDrive\Documents\Project1\diagram
 build_property._RazorSourceGeneratorDebug = 
-build_property.EffectiveAnalysisLevelStyle = 8.0
-build_property.EnableCodeStyleSeverity = 
 
-[D:/Project Pertamina/diagram/App.razor]
+[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project Pertamina/diagram/Pages/Diagram.razor]
+[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Diagram.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlhZ3JhbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project Pertamina/diagram/Pages/Home.razor]
+[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project Pertamina/diagram/_Imports.razor]
+[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project Pertamina/diagram/Layout/MainLayout.razor]
+[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-vdfloxlinx
 
-[D:/Project Pertamina/diagram/Layout/NavMenu.razor]
+[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-0hmoawhnwe
