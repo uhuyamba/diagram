@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rizky\\Documents\\solution\\PipingDiagramApp\\PipingDiagramApp.csproj": {}
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\PipingDiagramApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rizky\\Documents\\solution\\PipingDiagramApp\\PipingDiagramApp.csproj": {
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\PipingDiagramApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rizky\\Documents\\solution\\PipingDiagramApp\\PipingDiagramApp.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\PipingDiagramApp.csproj",
         "projectName": "PipingDiagramApp",
-        "projectPath": "C:\\Users\\rizky\\Documents\\solution\\PipingDiagramApp\\PipingDiagramApp.csproj",
-        "packagesPath": "C:\\Users\\rizky\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rizky\\Documents\\solution\\PipingDiagramApp\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\PipingDiagramApp.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rizky\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -55,13 +55,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )",
+              "version": "[8.0.18, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )",
+              "version": "[8.0.18, )",
               "autoReferenced": true
             }
           },
@@ -76,18 +76,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[8.0.6, 8.0.6]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.412/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
