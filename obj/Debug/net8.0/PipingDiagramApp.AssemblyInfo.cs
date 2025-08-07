@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PipingDiagramApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+849cb1aaafafee00e14a5f9576c96c7d174cac22")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e5cb5f2004258390fe5feb1cfcb6e2ba1fe8fd7")]
 [assembly: System.Reflection.AssemblyProductAttribute("PipingDiagramApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PipingDiagramApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -18,6 +18,36 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: #ffffff;
     position: relative;
+    
+    /* Initial state for animation */
+    opacity: 0;
+    transform: translateY(50px);
+    animation: cardEntrance-b-6408xjb5bh 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Animation keyframes for card entrance */
+@keyframes cardEntrance-b-6408xjb5bh {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Staggered animation delays for each card */
+.card:nth-child(1)[b-6408xjb5bh] {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(2)[b-6408xjb5bh] {
+    animation-delay: 0.3s;
+}
+
+.card:nth-child(3)[b-6408xjb5bh] {
+    animation-delay: 0.5s;
 }
 
 /* Stroke effect - gradient border */

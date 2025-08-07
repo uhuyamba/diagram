@@ -1,11 +1,11 @@
-﻿<nav class="navbar navbar-expand-lg bg-body-tertiary">
+﻿<nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="">
             <span class="bi bi-diagram-3-fill me-2" aria-hidden="true"></span>
             IntegrityMapping
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,23 +13,27 @@
         <div class="@NavMenuCssClass navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/home" Match="NavLinkMatch.All">
-                        <span class="bi bi-house-door-fill me-1" aria-hidden="true"></span> Home
+                    <NavLink class="nav-link nav-button" href="/home" Match="NavLinkMatch.All">
+                        <span class="nav-icon bi bi-house-door-fill me-1" aria-hidden="true"></span> 
+                        <span class="nav-text">Home</span>
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/tools">
-                        <span class="bi bi-diagram-3-fill me-1" aria-hidden="true"></span> Tools
+                    <NavLink class="nav-link nav-button" href="/tools">
+                        <span class="nav-icon bi bi-tools me-1" aria-hidden="true"></span> 
+                        <span class="nav-text">Tools</span>
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/">
-                        <span class="bi bi-diagram-3-fill me-1" aria-hidden="true"></span> Analytics
+                    <NavLink class="nav-link nav-button" href="/analytics">
+                        <span class="nav-icon bi bi-bar-chart-fill me-1" aria-hidden="true"></span> 
+                        <span class="nav-text">Analytics</span>
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/">
-                        <span class="bi bi-diagram-3-fill me-1" aria-hidden="true"></span> Logout
+                    <NavLink class="nav-link nav-button logout-btn" href="/logout">
+                        <span class="nav-icon bi bi-box-arrow-right me-1" aria-hidden="true"></span> 
+                        <span class="nav-text">Logout</span>
                     </NavLink>
                 </li>
             </ul>
