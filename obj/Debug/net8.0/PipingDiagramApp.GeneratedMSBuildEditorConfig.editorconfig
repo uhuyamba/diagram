@@ -13,35 +13,35 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = PipingDiagramApp
 build_property.RootNamespace = PipingDiagramApp
-build_property.ProjectDir = C:\Users\ASUS\OneDrive\Documents\Project1\diagram\
+build_property.ProjectDir = C:\Users\rizky\Documents\solution\PipingDiagramApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ASUS\OneDrive\Documents\Project1\diagram
+build_property.MSBuildProjectDirectory = C:\Users\rizky\Documents\solution\PipingDiagramApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/App.razor]
+[C:/Users/rizky/Documents/solution/PipingDiagramApp/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Diagram.razor]
+[C:/Users/rizky/Documents/solution/PipingDiagramApp/Pages/Diagram.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlhZ3JhbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Home.razor]
+[C:/Users/rizky/Documents/solution/PipingDiagramApp/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/_Imports.razor]
+[C:/Users/rizky/Documents/solution/PipingDiagramApp/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Layout/MainLayout.razor]
+[C:/Users/rizky/Documents/solution/PipingDiagramApp/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-vdfloxlinx
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Layout/NavMenu.razor]
+[C:/Users/rizky/Documents/solution/PipingDiagramApp/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-0hmoawhnwe
