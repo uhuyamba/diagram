@@ -4,9 +4,10 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px 0;
+    gap: 20px;
 }
 
-/* Card styling with stroke effects */
+/* Card styling with improved effects */
 .card[b-6408xjb5bh] {
     width: 320px;
     max-width: 100%;
@@ -50,36 +51,25 @@
     animation-delay: 0.5s;
 }
 
-/* Stroke effect - gradient border */
-.card[b-6408xjb5bh]::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #007bff, #28a745, #ffc107, #dc3545);
-    border-radius: 17px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.card:nth-child(4)[b-6408xjb5bh] {
+    animation-delay: 0.7s;
 }
 
-/* Hover effects */
+/* Hover effects - removed rainbow gradient */
 .card:hover[b-6408xjb5bh] {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
     border-color: #007bff;
 }
 
-.card:hover[b-6408xjb5bh]::before {
-    opacity: 1;
-}
-
-/* Card image styling */
+/* Card image styling - improved sizing */
 .card-img-top[b-6408xjb5bh] {
-    height: 200px;
-    object-fit: cover;
+    height: 180px;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 10px;
+    background-color: #f8f9fa;
     transition: transform 0.3s ease;
 }
 
@@ -209,6 +199,19 @@
     background: linear-gradient(90deg, #ffc107, #e0a800);
 }
 
+/* New: SLN (Card 4) theme color */
+.card:nth-child(4)[b-6408xjb5bh] {
+    border-left: 4px solid #17a2b8; /* Biru toska */
+}
+
+.card:nth-child(4):hover[b-6408xjb5bh] {
+    border-color: #117a8b;
+}
+
+.card:nth-child(4) .card-title[b-6408xjb5bh]::after {
+    background: linear-gradient(90deg, #17a2b8, #117a8b);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .card-group[b-6408xjb5bh] {
@@ -223,7 +226,7 @@
     }
 }
 
-/* Additional glow effect for cards */
+/* Subtle glow effect for cards */
 .card[b-6408xjb5bh] {
     position: relative;
 }
@@ -243,25 +246,4 @@
 
 .card:hover[b-6408xjb5bh]::after {
     box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
-}
-
-/* Loading animation for images */
-@keyframes shimmer-b-6408xjb5bh {
-    0% {
-        background-position: -200px 0;
-    }
-    100% {
-        background-position: calc(200px + 100%) 0;
-    }
-}
-
-.card-img-top[b-6408xjb5bh] {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200px 100%;
-    animation: shimmer-b-6408xjb5bh 1.5s infinite;
-}
-
-.card-img-top[src][b-6408xjb5bh] {
-    background: none;
-    animation: none;
 }
