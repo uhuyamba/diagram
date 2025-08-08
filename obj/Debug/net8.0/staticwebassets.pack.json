@@ -13,8 +13,20 @@
       "PackagePath": "staticwebassets\\PipingDiagramApp.styles.css"
     },
     {
-      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\Crude-oil.jpg",
-      "PackagePath": "staticwebassets\\Asset\\Crude-oil.jpg"
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\analysis.png",
+      "PackagePath": "staticwebassets\\Asset\\analysis.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\oil-tank.png",
+      "PackagePath": "staticwebassets\\Asset\\oil-tank.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\oil.png",
+      "PackagePath": "staticwebassets\\Asset\\oil.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\pipe.png",
+      "PackagePath": "staticwebassets\\Asset\\pipe.png"
     },
     {
       "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\app.css",

@@ -1,0 +1,129 @@
+@page "/home/heavyoil"
+
+<PageTitle>Heavy Oil</PageTitle>
+
+<div id="myDiagramDiv" style="width:100%; height:600px; border:1px solid lightgray;"></div>
+
+<script src="https://unpkg.com/gojs/release/go.js"></script>
+
+<script>
+    function init() {
+        const $ = go.GraphObject.make;
+        const myDiagram = $(go.Diagram, "myDiagramDiv", {
+            layout: $(go.TreeLayout, {
+                angle: 0,
+                arrangement: go.TreeLayout.ArrangementHorizontal,
+                layerSpacing: 100,
+                nodeSpacing: 50
+            }),
+            "undoManager.isEnabled": true
+        });
+
+        // Template node CGS
+        myDiagram.nodeTemplateMap.add("CGS",
+            $(go.Node, "Vertical",
+                {
+                    locationSpot: go.Spot.Center,
+                    background: "lightblue",
+                    padding: 8,
+                    click: function (e, obj) {
+                        var data = obj.part.data;
+                        window.location.href = `/home/heavyoil/cgs/${data.key}`;
+                    }
+                },
+                $(go.Shape, "Circle",
+                    { width: 40, height: 40, margin: 2, fill: "white", stroke: "blue" }),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif", margin: 2 },
+                    new go.Binding("text", "name")),
+                $(go.TextBlock, "Total Anomalies",
+                    { font: "10px sans-serif", stroke: "gray" }),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif" },
+                    new go.Binding("text", "anomalies")),
+                $(go.TextBlock,
+                    { font: "italic 11px sans-serif", stroke: "gray" },
+                    new go.Binding("text", "status"))
+            )
+        );
+
+        myDiagram.nodeTemplateMap.add("CGS_inactive",
+            $(go.Node, "Vertical",
+                {
+                    locationSpot: go.Spot.Center,
+                    background: "lightgray",
+                    padding: 8,
+                    click: function (e, obj) {
+                        var data = obj.part.data;
+                        window.location.href = `/cgs/${data.key}`;
+                    }
+                },
+                $(go.Shape, "Circle",
+                    { width: 40, height: 40, margin: 2, fill: "gray", stroke: "black" }),
+                $(go.Shape, "Rectangle",
+                    { width: 60, height: 15, fill: "black", margin: 2 }),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif", margin: 2 },
+                    new go.Binding("text", "name")),
+                $(go.TextBlock, "Total Anomalies",
+                    { font: "10px sans-serif", stroke: "gray" }),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif" },
+                    new go.Binding("text", "anomalies")),
+                $(go.TextBlock,
+                    { font: "italic 11px sans-serif", stroke: "gray" },
+                    new go.Binding("text", "status"))
+            )
+        );
+
+        myDiagram.nodeTemplateMap.add("TankFarm",
+            $(go.Node, "Vertical",
+                {
+                    locationSpot: go.Spot.Center,
+                    background: "lightgreen",
+                    padding: 8
+                },
+                $(go.Shape, "Rectangle",
+                    { width: 60, height: 60, margin: 2, fill: "green", stroke: "darkgreen" }),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif", margin: 2 },
+                    new go.Binding("text", "name"))
+            )
+        );
+
+        // Link style (pipa)
+        myDiagram.linkTemplate =
+            $(go.Link,
+                { routing: go.Link.Orthogonal, corner: 5, selectable: false },
+                $(go.Shape, { strokeWidth: 6, stroke: "black" }),
+                $(go.Shape, { toArrow: "Standard", stroke: "black", fill: "black" })
+            );
+
+        // Data node
+        myDiagram.model = new go.GraphLinksModel(
+            [
+                { key: 1, category: "CGS", name: "CGS 1", anomalies: 0, status: "(Status)" },
+                { key: 2, category: "CGS", name: "CGS 3", anomalies: 0, status: "(Status)" },
+                { key: 3, category: "CGS_inactive", name: "CGS 4 - inactive", anomalies: 0, status: "(Status)" },
+                { key: 4, category: "CGS", name: "CGS 5", anomalies: 0, status: "(Status)" },
+                { key: 5, category: "CGS", name: "CGS 10", anomalies: 0, status: "(Status)" },
+                { key: 6, category: "TankFarm", name: "Dumai Tank Farm" }
+            ],
+            [
+                { from: 1, to: 2 },
+                { from: 2, to: 3 },
+                { from: 2, to: 4 },
+                { from: 3, to: 6 },
+                { from: 4, to: 5 },
+                { from: 5, to: 6 }
+            ]
+        );
+    }
+
+    // Pastikan DOM sudah siap sebelum inisialisasi
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+</script>
