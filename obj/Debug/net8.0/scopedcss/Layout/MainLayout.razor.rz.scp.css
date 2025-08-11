@@ -1,3 +1,10 @@
+/* Reset bawaan browser */
+html[b-vdfloxlinx], body[b-vdfloxlinx] {
+    margin: 0;
+    padding: 0;
+}
+
+/* Layout dasar */
 .page[b-vdfloxlinx] {
     position: relative;
     display: flex;
@@ -5,25 +12,31 @@
     min-height: 100vh;
 }
 
+/* Header nempel di atas */
 header[b-vdfloxlinx] {
     position: sticky;
     top: 0;
     z-index: 1000;
+    margin: 0;
+    padding: 0;
 }
 
+/* Hilangkan jarak atas */
 main[b-vdfloxlinx] {
     flex: 1;
-    padding-top: 2rem;
+    padding-top: 0;
 }
 
+/* Konten tengah tanpa jarak tambahan */
 .content[b-vdfloxlinx] {
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 0;
 }
 
 @media (max-width: 768px) {
     main[b-vdfloxlinx] {
-        padding-top: 1rem;
+        padding-top: 0;
     }
     
     .content[b-vdfloxlinx] {

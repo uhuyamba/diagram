@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\PipingDiagramApp.styles.css"
     },
     {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\DumaiTankFarm.png",
+      "PackagePath": "staticwebassets\\Asset\\DumaiTankFarm.png"
+    },
+    {
       "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\analysis.png",
       "PackagePath": "staticwebassets\\Asset\\analysis.png"
     },
@@ -27,6 +31,14 @@
     {
       "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\pipe.png",
       "PackagePath": "staticwebassets\\Asset\\pipe.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\previous.png",
+      "PackagePath": "staticwebassets\\Asset\\previous.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\tank.png",
+      "PackagePath": "staticwebassets\\Asset\\tank.png"
     },
     {
       "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\app.css",
