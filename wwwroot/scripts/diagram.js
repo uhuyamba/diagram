@@ -4,6 +4,15 @@ function initDiagram() {
   // Define custom geometry strings
   const tank1 = "F M0 0 L0 80 120 80 120 0z";
   const tank2 = "F M0 0 L0 120 50 120 50 0z";
+  
+  // Simple wash tank - rectangular tank shape
+  const washTank = "F M10 10 L110 10 L110 70 L10 70 Z";
+  
+  // Simple shipping tank - larger rectangular tank shape
+  const shippingTank = "F M5 5 L125 5 L125 75 L5 75 Z";
+  
+  // Realistic gas boot separator - horizontal drum with inlet/outlet nozzles
+  const gasBootSeparator = "F M10 20 L90 20 A20 20 0 0 1 90 60 L10 60 A20 20 0 0 1 10 20 Z M5 35 L15 35 L15 45 L5 45 Z M95 35 L105 35 L105 45 L95 45 Z M40 5 L60 5 L60 20 L40 20 Z M40 60 L60 60 L60 75 L40 75 Z";
 
   // Updated pump geometry to match the image - vertical cylindrical pump with piston rod
   const pump1 =
@@ -23,7 +32,144 @@ function initDiagram() {
     allowVerticalScroll: true,
   });
 
-  // Tank template
+  // Enhanced Gas Boot template with realistic separator design
+  myDiagram.nodeTemplateMap.add(
+    "gasboot",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          const node = obj.part;
+          if (node) fetchAndShowInfo(node.data.key);
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "black",
+          geometryString: gasBootSeparator,
+        },
+        new go.Binding("fill", "color")
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Center,
+          stroke: "black",
+          font: "bold 9pt sans-serif",
+          margin: 2
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Wash Tank template with realistic cylindrical design
+  myDiagram.nodeTemplateMap.add(
+    "washtank",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          const node = obj.part;
+          if (node) fetchAndShowInfo(node.data.key);
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "darkred",
+          geometryString: washTank,
+          fill: new go.Brush("Linear", {
+            0: go.Brush.darken("#FF4500"),
+            0.2: "#FF6347", 
+            0.5: "#FF7F50",
+            0.8: "#FF6347",
+            1: go.Brush.darken("#FF4500"),
+            start: go.Spot.Left,
+            end: go.Spot.Right,
+          }),
+        },
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Center,
+          stroke: "black",
+          font: "bold 9pt sans-serif",
+          margin: 2
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Shipping Tank template with realistic larger cylindrical design
+  myDiagram.nodeTemplateMap.add(
+    "shippingtank",
+    $(
+      go.Node,
+      "Spot",
+      {
+        locationSpot: go.Spot.Center,
+        locationObjectName: "SHAPE",
+        click: function (e, obj) {
+          const node = obj.part;
+          if (node) fetchAndShowInfo(node.data.key);
+        },
+      },
+      new go.Binding("location", "pos", go.Point.parse).makeTwoWay(
+        go.Point.stringify
+      ),
+      $(
+        go.Shape,
+        {
+          name: "SHAPE",
+          strokeWidth: 2,
+          stroke: "darkgreen",
+          geometryString: shippingTank,
+          fill: new go.Brush("Linear", {
+            0: go.Brush.darken("#228B22"),
+            0.2: "#32CD32", 
+            0.5: "#90EE90",
+            0.8: "#32CD32",
+            1: go.Brush.darken("#228B22"),
+            start: go.Spot.Left,
+            end: go.Spot.Right,
+          }),
+        },
+      ),
+      $(
+        go.TextBlock,
+        {
+          alignment: go.Spot.Center,
+          stroke: "white",
+          font: "bold 9pt sans-serif",
+          background: "rgba(0,0,0,0.7)",
+          margin: 2
+        },
+        new go.Binding("text", "key")
+      )
+    )
+  );
+
+  // Tank template (for other tanks)
   myDiagram.nodeTemplateMap.add(
     "tank",
     $(
@@ -63,7 +209,7 @@ function initDiagram() {
         {
           alignment: go.Spot.Center,
           stroke: "black",
-          font: "bold 12pt sans-serif",
+          font: "bold 10pt sans-serif",
         },
         new go.Binding("text", "key")
       )
@@ -181,7 +327,7 @@ function initDiagram() {
     ),
     $(
       go.TextBlock,
-      { margin: 4, editable: true },
+      { margin: 4, editable: true, font: "9pt sans-serif" },
       new go.Binding("text", "key").makeTwoWay()
     )
   );
@@ -206,7 +352,7 @@ function initDiagram() {
         name: "SHAPE",
         strokeWidth: 2,
         stroke: "black",
-        geometryString: rectArrowRight, // <== ini kuncinya
+        geometryString: rectArrowRight,
         fill: "transparent",
       }),
       $(
@@ -221,159 +367,171 @@ function initDiagram() {
     )
   );
 
-  // Link template with color binding
+  // Enhanced Link template with orthogonal routing for clearer connections
   myDiagram.linkTemplate = $(
     go.Link,
-    { routing: go.Link.AvoidsNodes, curve: go.Link.JumpOver },
+    { 
+      routing: go.Link.Orthogonal, 
+      corner: 10,
+      reshapable: true,
+      resegmentable: true
+    },
     new go.Binding("routing", "routing"),
     $(go.Shape, { strokeWidth: 3 }, new go.Binding("stroke", "color")),
     $(
       go.Shape,
-      { toArrow: "Standard", strokeWidth: 0 },
+      { toArrow: "Standard", strokeWidth: 0, scale: 1.2 },
       new go.Binding("fill", "color")
     )
   );
 
-  // Set the model data - Layout following reference images with proper spacing and flow
+  // Improved layout with better spacing and positioning
   myDiagram.model = new go.GraphLinksModel(
     [
-      // Top row - Starting point (far left)
+      // Starting point (far left)
       {
         key: "Produce Well",
         category: "rectarrow",
-        pos: "50 50",
+        pos: "50 150",
       },
 
-      // Top row - Gas processing (horizontal flow)
+      // Gas Boot separators - positioned vertically with proper spacing and realistic design
       {
         key: "Gas Boot I",
-        category: "tank",
-        tankType: tank2,
-        pos: "250 80",
+        category: "gasboot",
+        color: new go.Brush("Linear", {
+          0: go.Brush.darken("#2E8B57"),
+          0.1: "#90EE90", 
+          0.3: "#98FB98",
+          0.7: "#90EE90",
+          0.9: go.Brush.darken("#2E8B57"),
+          1: "#006400",
+          start: go.Spot.Top,
+          end: go.Spot.Bottom,
+        }),
+        pos: "220 100",
       },
       {
-        key: "Gas Boot II",
-        category: "tank",
-        tankType: tank2,
-        pos: "400 80",
+        key: "Gas Boot II", 
+        category: "gasboot",
+        color: new go.Brush("Linear", {
+          0: go.Brush.darken("#DC143C"),
+          0.1: "#DC143C", 
+          0.3: "#DC143C",
+          0.7: "#DC143C",
+          0.9: go.Brush.darken("#DC143C"),
+          1: "#8B0000",
+          start: go.Spot.Top,
+          end: go.Spot.Bottom,
+        }),
+        pos: "220 220",
       },
+
+      // Wash Tanks with simple rectangular tank design and red/green colors
       {
         key: "Wash Tank I",
-        category: "tank",
-        tankType: tank1,
-
-        pos: "700 80",
+        category: "washtank",
+        pos: "500 100",
       },
       {
         key: "Wash Tank II",
-        category: "tank",
-        tankType: tank1,
-
-        pos: "850 80",
+        category: "washtank",
+        pos: "680 160",
       },
       {
         key: "Wash Tank III",
-        category: "tank",
-        tankType: tank1,
-
-        pos: "1000 80",
+        category: "washtank",
+        pos: "860 100",
       },
 
-      // Lower middle - Additional wash tank (like in reference image 2)
+      // Shipping tank with simple rectangular design and green color
       {
         key: "Shipping Tank",
-        category: "tank",
-        tankType: tank1,
-        pos: "400 250",
+        category: "shippingtank",
+        pos: "500 320",
       },
 
-      // Bottom row - Processing equipment (left to right flow)
       {
         key: "Pompa-0201",
         color: "#f9f9f9",
-        pos: "150 350",
+        pos: "200 450",
       },
       {
         key: "Metering w-0201",
         category: "metering",
         color: "#e6f3ff",
-        pos: "350 380",
+        pos: "380 450",
       },
       {
         key: "Shipping Line",
         category: "shippingline",
         color: "#fff2e6",
-        pos: "550 380",
+        pos: "580 450",
       },
 
-      // Right side processes (vertical layout like in reference)
       {
         key: "Ko Drum",
         color: "#eeeeee",
-        pos: "750 250",
+        pos: "680 280",
       },
       {
         key: "Gas Plant",
         category: "rectarrow",
-        pos: "900 250",
+        pos: "860 280",
       },
+
       {
         key: "Inlet Raw Water",
         category: "rectarrow",
-        pos: "1050 250",
+        pos: "1040 160",
       },
 
-      // Bottom right - Water treatment (like in reference image 2)
       {
         key: "Inlet Surge Tank",
         category: "rectarrow",
-        pos: "150 500",
+        pos: "200 580",
       },
       {
         key: "Water Balance Tank",
         category: "rectarrow",
-        pos: "400 520",
+        pos: "500 580",
       },
     ],
     [
-      // Main production flow (Black - Mixed Fluid dari Produce Well)
-      { from: "Produce Well", to: "Gas Boot I", color: "#000000" },
-      { from: "Produce Well", to: "Gas Boot II", color: "#000000" },
+      { from: "Produce Well", to: "Gas Boot I", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Produce Well", to: "Gas Boot II", color: "#000000", routing: go.Link.Orthogonal },
 
-      // Oil processing line (Black - Minyak dari separator ke wash tank)
-      { from: "Gas Boot I", to: "Wash Tank I", color: "#000000" },
-      { from: "Gas Boot II", to: "Wash Tank II", color: "#000000" },
-      { from: "Wash Tank I", to: "Wash Tank III", color: "#000000" },
-      { from: "Wash Tank II", to: "Wash Tank III", color: "#000000" },
+      { from: "Gas Boot I", to: "Wash Tank I", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Gas Boot II", to: "Wash Tank II", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Wash Tank I", to: "Wash Tank III", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Wash Tank II", to: "Wash Tank III", color: "#000000", routing: go.Link.Orthogonal },
 
-      // Oil to shipping (Black continuation - Crude Oil bersih)
-      { from: "Wash Tank I", to: "Shipping Tank", color: "#000000" },
-      { from: "Wash Tank II", to: "Shipping Tank", color: "#000000" },
-      { from: "Wash Tank III", to: "Shipping Tank", color: "#000000" },
+  
+      { from: "Wash Tank I", to: "Shipping Tank", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Wash Tank II", to: "Shipping Tank", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Wash Tank III", to: "Shipping Tank", color: "#000000", routing: go.Link.Orthogonal },
 
-      // Final oil shipping line (Black continuation)
-      { from: "Shipping Tank", to: "Pompa-0201", color: "#000000" },
-      { from: "Pompa-0201", to: "Metering w-0201", color: "#000000" },
-      { from: "Metering w-0201", to: "Shipping Line", color: "#000000" },
+      { from: "Shipping Tank", to: "Pompa-0201", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Pompa-0201", to: "Metering w-0201", color: "#000000", routing: go.Link.Orthogonal },
+      { from: "Metering w-0201", to: "Shipping Line", color: "#000000", routing: go.Link.Orthogonal },
 
-      // Gas processing line (Yellow - Aliran Gas)
-      { from: "Gas Boot I", to: "Ko Drum", color: "#FFD700" },
-      { from: "Gas Boot II", to: "Ko Drum", color: "#FFD700" },
-      { from: "Ko Drum", to: "Gas Plant", color: "#FFD700" },
+      { from: "Gas Boot I", to: "Ko Drum", color: "#FFD700", routing: go.Link.Orthogonal },
+      { from: "Gas Boot II", to: "Ko Drum", color: "#FFD700", routing: go.Link.Orthogonal },
+      { from: "Ko Drum", to: "Gas Plant", color: "#FFD700", routing: go.Link.Orthogonal },
 
-      // Water treatment line (Blue - Aliran Air/Produced Water)
-      { from: "Wash Tank I", to: "Inlet Surge Tank", color: "#0066FF" },
-      { from: "Wash Tank II", to: "Inlet Surge Tank", color: "#0066FF" },
-      { from: "Wash Tank III", to: "Inlet Surge Tank", color: "#0066FF" },
-      { from: "Inlet Surge Tank", to: "Water Balance Tank", color: "#0066FF" },
+      { from: "Wash Tank I", to: "Inlet Surge Tank", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Wash Tank II", to: "Inlet Surge Tank", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Wash Tank III", to: "Inlet Surge Tank", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Inlet Surge Tank", to: "Water Balance Tank", color: "#0066FF", routing: go.Link.Orthogonal },
 
       // Raw water supply (Blue - Water Supply)
-      { from: "Inlet Raw Water", to: "Wash Tank I", color: "#0066FF" },
-      { from: "Inlet Raw Water", to: "Wash Tank II", color: "#0066FF" },
-      { from: "Inlet Raw Water", to: "Wash Tank III", color: "#0066FF" },
-      { from: "Water Balance Tank", to: "Wash Tank I", color: "#0066FF" },
-      { from: "Water Balance Tank", to: "Wash Tank II", color: "#0066FF" },
-      { from: "Water Balance Tank", to: "Wash Tank III", color: "#0066FF" },
+      { from: "Inlet Raw Water", to: "Wash Tank I", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Inlet Raw Water", to: "Wash Tank II", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Inlet Raw Water", to: "Wash Tank III", color: "#0066FF", routing: go.Link.Orthogonal },
+
+      { from: "Water Balance Tank", to: "Wash Tank I", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Water Balance Tank", to: "Wash Tank II", color: "#0066FF", routing: go.Link.Orthogonal },
+      { from: "Water Balance Tank", to: "Wash Tank III", color: "#0066FF", routing: go.Link.Orthogonal },
     ]
   );
 }
