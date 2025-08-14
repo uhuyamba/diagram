@@ -13,63 +13,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = PipingDiagramApp
 build_property.RootNamespace = PipingDiagramApp
-build_property.ProjectDir = C:\Users\ASUS\OneDrive\Documents\Project1\diagram\
+build_property.ProjectDir = C:\Users\user\Documents\KULIAH BANG\Magang\diagram\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ASUS\OneDrive\Documents\Project1\diagram
+build_property.MSBuildProjectDirectory = C:\Users\user\Documents\KULIAH BANG\Magang\diagram
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/App.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Analytics.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/Analytics.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5hbHl0aWNzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/HeavyOil/HeavyOil.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/HeavyOil/HeavyOil.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGVhdnlPaWxcSGVhdnlPaWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/HeavyOil/HeavyOilCgs.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/HeavyOil/HeavyOilCgs.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGVhdnlPaWxcSGVhdnlPaWxDZ3MucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Login.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Logout.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/Logout.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Sln.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/Sln.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Sls.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xzLnJhem9y
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/SLS/Sls.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU0xTXFNscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Tools.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/Tools.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9vbHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/_Imports.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Layout/MainLayout.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-vdfloxlinx
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Layout/NavMenu.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-0hmoawhnwe
 
-[C:/Users/ASUS/OneDrive/Documents/Project1/diagram/Pages/Home/Home.razor]
+[C:/Users/user/Documents/KULIAH BANG/Magang/diagram/Pages/Home/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-6408xjb5bh

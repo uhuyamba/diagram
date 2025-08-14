@@ -1,0 +1,115 @@
+@page "/home/sls"
+
+<PageTitle>SLS</PageTitle>
+
+<div id="myDiagramDiv" style="width:100%; height:calc(100vh - 140px);
+                border:1px solid lightgray;
+                margin:70px auto;">
+</div>
+
+<script src="https://unpkg.com/gojs/release/go.js"></script>
+
+<script>
+    function init() {
+        const $ = go.GraphObject.make;
+
+        const myDiagram = $(go.Diagram, "myDiagramDiv", {
+            "undoManager.isEnabled": true
+        });
+
+        // Template untuk GS (active)
+        myDiagram.nodeTemplateMap.add("GS",
+            $(go.Node, "Vertical",
+                { locationSpot: go.Spot.Center },
+                $(go.Picture,
+                    { width: 50, height: 50, margin: 2 },
+                    new go.Binding("source", "icon")),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif", margin: 2 },
+                    new go.Binding("text", "name")),
+                $(go.TextBlock,
+                    { font: "10px sans-serif", stroke: "gray" },
+                    new go.Binding("text", "totalLabel")),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif" },
+                    new go.Binding("text", "percent"),
+                    new go.Binding("stroke", "color"))
+            )
+        );
+
+        // Template untuk Station (North Booster, CPS)
+        myDiagram.nodeTemplateMap.add("Station",
+            $(go.Node, "Vertical",
+                { locationSpot: go.Spot.Center },
+                $(go.Picture,
+                    { width: 60, height: 60, margin: 2 },
+                    new go.Binding("source", "icon")),
+                $(go.TextBlock,
+                    { font: "bold 12px sans-serif", margin: 2 },
+                    new go.Binding("text", "name"))
+            )
+        );
+
+        // Template untuk junction points (titik pertemuan pipa)
+        myDiagram.nodeTemplateMap.add("Junction",
+            $(go.Node,
+                { locationSpot: go.Spot.Center },
+                $(go.Shape, "Circle",
+                    { width: 8, height: 8, fill: "black", stroke: null })
+            )
+        );
+
+        // Link template dengan custom routing untuk menghindari overlap
+        myDiagram.linkTemplate =
+            $(go.Link,
+                {
+                    routing: go.Link.AvoidsNodes,
+                    corner: 10,
+                    selectable: false,
+                    curve: go.Link.JumpOver
+                },
+                $(go.Shape, { strokeWidth: 6, stroke: "black" })
+            );
+
+        // Data model dengan posisi yang lebih terpisah
+        myDiagram.model = new go.GraphLinksModel(
+            [
+                { key: 1, category: "Station", name: "CPS Duri", icon: "./asset/cps-duri.svg", loc: "-550 0" },
+                { key: 2, category: "GS", name: "Kota batak GS", totalLabel: "19 Total Anomalies", percent: "44.23%", color: "red", icon: "./asset/tank.png", loc: "-400 20" },
+                { key: 3, category: "GS", name: "Petapahan GS", totalLabel: "3 Total Anomalies", percent: "74.22%", color: "orange", icon: "./asset/tank.png", loc: "-500 150" },
+                { key: 4, category: "GS", name: "Suram GS", totalLabel: "1 Total Anomalies", percent: "76.39%", color: "orange", icon: "./asset/tank.png", loc: "-300 200" },
+                { key: 5, category: "Station", name: "North Booster Station", icon: "./asset/nbs.svg", loc: "-200 0" },
+                { key: 6, category: "GS", name: "Minas GS 5", totalLabel: "4 Total Anomalies", percent: "79.17%", color: "orange", icon: "./asset/tank.png", loc: "-100 -200" },
+                { key: 7, category: "GS", name: "Minas GS 3", totalLabel: "9 Total Anomalies", percent: "71.02%", color: "orange", icon: "./asset/tank.png", loc: "120 -200" },
+                { key: 8, category: "GS", name: "Minas GS 1", totalLabel: "9 Total Anomalies", percent: "71.65%", color: "orange", icon: "./asset/tank.png", loc: "300 -200" },
+                { key: 9, category: "GS", name: "Minas GS 6", totalLabel: "8 Total Anomalies", percent: "42.39%", color: "red", icon: "./asset/tank.png", loc: "-50 200" },
+                { key: 10, category: "GS", name: "Minas GS 4", totalLabel: "9 Total Anomalies", percent: "55.65%", color: "red", icon: "./asset/tank.png", loc: "150 200" },
+                { key: 11, category: "GS", name: "Minas GS 2", totalLabel: "0 Total Anomalies", percent: "64.10%", color: "orange", icon: "./asset/tank.png", loc: "350 200" }
+            ],
+            [
+                { from: 1, to: 2 },
+                { from: 3, to: 2 },
+                { from: 4, to: 3 },
+                { from: 2, to: 5 },
+                { from: 5, to: 6 },
+                { from: 5, to: 9 },
+                { from: 5, to: 7 },
+                { from: 5, to: 10 },
+                { from: 5, to: 8 },
+                { from: 5, to: 11 }
+            ]
+        );
+
+        // Set posisi manual
+        myDiagram.nodes.each(function (n) {
+            var d = n.data;
+            if (d.loc) n.position = go.Point.parse(d.loc);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+</script>
