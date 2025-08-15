@@ -2,7 +2,11 @@
 
 <PageTitle>Heavy Oil</PageTitle>
 
-<div id="myDiagramDiv" style="width:100%; height:600px; border:1px solid lightgray;"></div>
+<div id="myDiagramDiv" 
+     style="width:100%; height:calc(100vh - 140px); 
+            border:1px solid lightgray; 
+            margin:70px auto;">
+</div>
 
 <script src="https://unpkg.com/gojs/release/go.js"></script>
 
@@ -10,31 +14,24 @@
     function init() {
         const $ = go.GraphObject.make;
         const myDiagram = $(go.Diagram, "myDiagramDiv", {
-            layout: $(go.TreeLayout, {
-                angle: 0,
-                arrangement: go.TreeLayout.ArrangementHorizontal,
-                layerSpacing: 100,
-                nodeSpacing: 50
-            }),
             "undoManager.isEnabled": true
         });
 
-        // Template node CGS
+        function cgsClick(e, obj) {
+            const data = obj.part.data;
+            if (data && data.key) {
+                window.location.href = `/home/heavyoil/cgs/${data.key}`;
+            }
+        }
+
+        // Template CGS aktif
         myDiagram.nodeTemplateMap.add("CGS",
             $(go.Node, "Vertical",
-                {
-                    locationSpot: go.Spot.Center,
-                    background: "lightblue",
-                    padding: 8,
-                    click: function (e, obj) {
-                        var data = obj.part.data;
-                        window.location.href = `/home/heavyoil/cgs/${data.key}`;
-                    }
-                },
-                $(go.Shape, "Circle",
-                    { width: 40, height: 40, margin: 2, fill: "white", stroke: "blue" }),
-                $(go.TextBlock,
-                    { font: "bold 12px sans-serif", margin: 2 },
+                { locationSpot: go.Spot.Center, click: cgsClick },
+                $(go.Picture,
+                    { width: 40, height: 40, margin: 2 },
+                    new go.Binding("source", "icon")),
+                $(go.TextBlock, { font: "bold 12px sans-serif", margin: 2 },
                     new go.Binding("text", "name")),
                 $(go.TextBlock, "Total Anomalies",
                     { font: "10px sans-serif", stroke: "gray" }),
@@ -47,23 +44,14 @@
             )
         );
 
+        // Template CGS inactive
         myDiagram.nodeTemplateMap.add("CGS_inactive",
             $(go.Node, "Vertical",
-                {
-                    locationSpot: go.Spot.Center,
-                    background: "lightgray",
-                    padding: 8,
-                    click: function (e, obj) {
-                        var data = obj.part.data;
-                        window.location.href = `/cgs/${data.key}`;
-                    }
-                },
-                $(go.Shape, "Circle",
-                    { width: 40, height: 40, margin: 2, fill: "gray", stroke: "black" }),
-                $(go.Shape, "Rectangle",
-                    { width: 60, height: 15, fill: "black", margin: 2 }),
-                $(go.TextBlock,
-                    { font: "bold 12px sans-serif", margin: 2 },
+                { locationSpot: go.Spot.Center, click: cgsClick },
+                $(go.Picture,
+                    { width: 40, height: 40, margin: 2 },
+                    new go.Binding("source", "icon")),
+                $(go.TextBlock, { font: "bold 12px sans-serif", margin: 2 },
                     new go.Binding("text", "name")),
                 $(go.TextBlock, "Total Anomalies",
                     { font: "10px sans-serif", stroke: "gray" }),
@@ -76,51 +64,68 @@
             )
         );
 
+        // Template Tank Farm
         myDiagram.nodeTemplateMap.add("TankFarm",
             $(go.Node, "Vertical",
-                {
-                    locationSpot: go.Spot.Center,
-                    background: "lightgreen",
-                    padding: 8
-                },
-                $(go.Shape, "Rectangle",
-                    { width: 60, height: 60, margin: 2, fill: "green", stroke: "darkgreen" }),
-                $(go.TextBlock,
-                    { font: "bold 12px sans-serif", margin: 2 },
+                { locationSpot: go.Spot.Center },
+                $(go.Picture,
+                    { width: 60, height: 60, margin: 2 },
+                    new go.Binding("source", "icon")),
+                $(go.TextBlock, { font: "bold 12px sans-serif", margin: 2 },
                     new go.Binding("text", "name"))
+            )
+        );
+
+        // Template untuk junction points (titik pertemuan pipa)
+        myDiagram.nodeTemplateMap.add("Junction",
+            $(go.Node,
+                { locationSpot: go.Spot.Center },
+                $(go.Shape, "Circle",
+                    { width: 8, height: 8, fill: "black", stroke: null })
             )
         );
 
         // Link style (pipa)
         myDiagram.linkTemplate =
             $(go.Link,
-                { routing: go.Link.Orthogonal, corner: 5, selectable: false },
+                { routing: go.Link.Orthogonal, corner: 0, selectable: false },
                 $(go.Shape, { strokeWidth: 6, stroke: "black" }),
-                $(go.Shape, { toArrow: "Standard", stroke: "black", fill: "black" })
+                new go.Binding("toArrow", "arrow")
             );
 
         // Data node
         myDiagram.model = new go.GraphLinksModel(
             [
-                { key: 1, category: "CGS", name: "CGS 1", anomalies: 0, status: "(Status)" },
-                { key: 2, category: "CGS", name: "CGS 3", anomalies: 0, status: "(Status)" },
-                { key: 3, category: "CGS_inactive", name: "CGS 4 - inactive", anomalies: 0, status: "(Status)" },
-                { key: 4, category: "CGS", name: "CGS 5", anomalies: 0, status: "(Status)" },
-                { key: 5, category: "CGS", name: "CGS 10", anomalies: 0, status: "(Status)" },
-                { key: 6, category: "TankFarm", name: "Dumai Tank Farm" }
+                { key: 1, category: "CGS", name: "CGS 1", anomalies: "67.68%", status: "14 Total Anomalies", icon: "./Asset/tank.png", loc: "-300 -150" },
+                { key: 2, category: "CGS", name: "CGS 3", anomalies: "82.30%", status: "17 Total Anomalies", icon: "./Asset/tank.png", loc: "-100 -150" },
+                { key: 3, category: "CGS", name: "CGS 5", anomalies: "69.97%", status: "24 Total Anomalies", icon: "./Asset/tank.png", loc: "-200 150" },
+                { key: 4, category: "CGS_inactive", name: "CGS 4 - inactive", anomalies: "", status: "", icon: "./Asset/tank.png", loc: "100 -150" },
+                { key: 5, category: "CGS", name: "CGS 10", anomalies: "71.56%", status: "17 Total Anomalies", icon: "./Asset/tank.png", loc: "200 150" },
+                { key: 6, category: "TankFarm", name: "Dumai Tank Farm", icon: "./Asset/DumaiTankFarm.png", loc: "400 0" },
+                { key: 101, category: "Junction", loc: "-150 -50" },
+                { key: 102, category: "Junction", loc: "-50 -50" },
+                { key: 103, category: "Junction", loc: "50 -50" },
+                { key: 104, category: "Junction", loc: "200 -50" }
             ],
             [
-                { from: 1, to: 2 },
-                { from: 2, to: 3 },
-                { from: 2, to: 4 },
-                { from: 3, to: 6 },
-                { from: 4, to: 5 },
-                { from: 5, to: 6 }
+                { from: 1, to: 101 },
+                { from: 2, to: 101 },
+                { from: 101, to: 102 },
+                { from: 3, to: 102 },
+                { from: 102, to: 103 },
+                { from: 4, to: 103 },
+                { from: 103, to: 104 },
+                { from: 5, to: 104 },
+                { from: 104, to: 6, arrow: "Standard" }
             ]
         );
+
+        myDiagram.nodes.each(function (n) {
+            var d = n.data;
+            if (d.loc) n.position = go.Point.parse(d.loc);
+        });
     }
 
-    // Pastikan DOM sudah siap sebelum inisialisasi
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
