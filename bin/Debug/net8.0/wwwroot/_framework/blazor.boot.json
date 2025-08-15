@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "PipingDiagramApp",
   "resources": {
-    "hash": "sha256-9B8DgEtQfs/UKpIYCHrTvJpCAnch2Hu5rOq5lLi1SGQ=",
+    "hash": "sha256-D0FjDv3Az5189za1sncfzaGq4qj7vX1MBwWm+yXcwRY=",
     "jsModuleNative": {
       "dotnet.native.8.0.18.yo3atmw4rl.js": "sha256-1QpKPnxEuRCElzcp+e3MrovJeAJkuzqKmRQay/6Aa08="
     },
@@ -208,10 +208,10 @@
       "mscorlib.wasm": "sha256-UnQd0YPXNpwbXsKqO8RAqgUVuwZsSpprfAIPpdV/y1Q=",
       "netstandard.wasm": "sha256-/QbD8JDZyYwfyk89W3qJL3HTAINDCVziZIySHIZcDhw=",
       "System.Private.CoreLib.wasm": "sha256-oBqNgH7R24FqGbaL3XnfQDqn3rk28jERFosgAryKT6U=",
-      "PipingDiagramApp.wasm": "sha256-0Hf0H6sNsV89hDvBvWz+Gn1ET7TNlnfKNqeXbocqa7I="
+      "PipingDiagramApp.wasm": "sha256-cn9tRCruCyYo6Pln0zA7VsFy4tJSKyGBqJIlDBxor58="
     },
     "pdb": {
-      "PipingDiagramApp.pdb": "sha256-hnc+7I4T1XCvnPWVlXxK+5bB2zFxW+/aBwa7l6rQJrI="
+      "PipingDiagramApp.pdb": "sha256-u8QKKz6dsSjAI5hvpDkA5Q7l9NykN6A6dvxMGYL7wyA="
     }
   },
   "cacheBootResources": true,

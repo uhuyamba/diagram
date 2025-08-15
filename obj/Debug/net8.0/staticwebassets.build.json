@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "foQw71GasSExEhqIAnebZU/jiQzcID7KeI1Zwj6SCLc=",
+  "Hash": "P1n8Qkvo2tge4lsyNTc+b6RhQMgtpyM11bzP2LiR3mA=",
   "Source": "PipingDiagramApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -7845,25 +7845,6 @@
       "OriginalItemSpec": "wwwroot\\Asset\\cps-duri.svg"
     },
     {
-      "Identity": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\Dumai_tank.png",
-      "SourceId": "PipingDiagramApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "Asset/Dumai_tank.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Asset\\Dumai_tank.png"
-    },
-    {
       "Identity": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\DumaiTankFarm.svg",
       "SourceId": "PipingDiagramApp",
       "SourceType": "Discovered",
@@ -7881,25 +7862,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Asset\\DumaiTankFarm.svg"
-    },
-    {
-      "Identity": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\factory.png",
-      "SourceId": "PipingDiagramApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "Asset/factory.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Asset\\factory.png"
     },
     {
       "Identity": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\nbs.svg",
