@@ -1,169 +1,330 @@
 @page "/home/sln"
 
-<PageTitle>Sumatra Light North</PageTitle>
+<PageTitle>SLN</PageTitle>
 
-<div id="myDiagramDiv" style="width:100%; height:calc(100vh - 140px);
-                border:1px solid lightgray;
-                margin:70px auto;">
+<div id="myDiagramDiv" 
+     style="width:100%; height:calc(100vh - 140px); 
+            border:1px solid lightgray; 
+            margin:70px auto;">
 </div>
 
 <script src="https://unpkg.com/gojs/release/go.js"></script>
 
 <script>
-(function() {
-    const $ = go.GraphObject.make;
+    function init() {
+        const $ = go.GraphObject.make;
+        const myDiagram = $(go.Diagram, "myDiagramDiv", {
+            "undoManager.isEnabled": true,
+            initialContentAlignment: go.Spot.Center,
+            "toolManager.hoverDelay": 100,
+            allowZoom: true,
+            allowHorizontalScroll: true,
+            allowVerticalScroll: true
+        });
 
-    const diagram = $(go.Diagram, "myDiagramDiv", {
-        initialContentAlignment: go.Spot.Center,
-        "undoManager.isEnabled": true
-    });
+        function gsClick(e, obj) {
+            const data = obj.part.data;
+            if (data && data.key) {
+                window.location.href = `/home/heavyoil/gs/${data.key}`;
+            }
+        }
 
-    function perfColor(p) {
-      if (p >= 90) return "#2e7d32";       
-      if (p >= 85) return "#fbc02d";       
-      if (p >= 75) return "#ef6c00";     
-      return "#c62828";                   
-    }
+        // Template untuk Gas Station dengan design sesuai gambar
+        myDiagram.nodeTemplateMap.add("GS",
+            $(go.Node, "Vertical",
+                { 
+                    locationSpot: go.Spot.Center, 
+                    click: gsClick,
+                    background: "white",
+                    margin: 5
+                },
+                // Container untuk icon dan total anomalies
+                $(go.Panel, "Vertical",
+                    { alignment: go.Spot.Center },
+                    // Icon gas station dengan background putih
+                    $(go.Panel, "Auto",
+                        $(go.Shape, "RoundedRectangle",
+                            { 
+                                width: 50, 
+                                height: 50,
+                                fill: "white",
+                                stroke: "#dddddd",
+                                strokeWidth: 1,
+                                parameter1: 8
+                            }
+                        ),
+                        // Icon gas station
+                        $(go.Picture, "./Asset/factory.png",
+                            {
+                                width: 35,
+                                height: 35,
+                                imageStretch: go.GraphObject.Uniform,
+                                background: null
+                            }
+                        )
+                    ),
+                    // Total Anomalies count (di atas icon)
+                    $(go.TextBlock,
+                        { 
+                            font: "bold 14px Arial",
+                            stroke: "#333",
+                            margin: new go.Margin(5, 0, 0, 0),
+                            alignment: go.Spot.Center
+                        },
+                        new go.Binding("text", "anomalyCount")
+                    ),
+                    // Text "Total Anomalies"
+                    $(go.TextBlock, "Total Anomalies",
+                        { 
+                            font: "10px Arial",
+                            stroke: "#666",
+                            margin: new go.Margin(2, 0, 8, 0),
+                            alignment: go.Spot.Center
+                        }
+                    )
+                ),
+                // Nama GS
+                $(go.TextBlock,
+                    { 
+                        font: "bold 12px Arial",
+                        stroke: "#333",
+                        margin: new go.Margin(5, 2, 8, 2),
+                        textAlign: "center",
+                        maxSize: new go.Size(100, NaN),
+                        wrap: go.TextBlock.WrapFit
+                    },
+                    new go.Binding("text", "name")
+                ),
+                // Percentage box
+                $(go.Shape, "RoundedRectangle",
+                    {
+                        width: 80,
+                        height: 30,
+                        margin: new go.Margin(0, 5, 5, 5),
+                        parameter1: 8,
+                        strokeWidth: 0
+                    },
+                    new go.Binding("fill", "color")
+                ),
+                // Percentage text
+                $(go.TextBlock,
+                    {
+                        font: "bold 16px Arial",
+                        stroke: "white",
+                        margin: new go.Margin(-25, 0, 0, 0),
+                        alignment: go.Spot.Center,
+                        alignmentFocus: go.Spot.Center
+                    },
+                    new go.Binding("text", "percentage")
+                )
+            )
+        );
 
-    function PercentPanel() {
-      return $(go.Panel, "Auto",
-        { margin: new go.Margin(4, 0, 0, 0) },
-        $(go.Shape, "RoundedRectangle",
-          { stroke: null, parameter1: 6, height: 26, minSize: new go.Size(88, 26) },
-          new go.Binding("fill", "percent", p => perfColor(+p))
+        // Template untuk CPS/Processing unit
+        myDiagram.nodeTemplateMap.add("CPS",
+            $(go.Node, "Vertical",
+                { locationSpot: go.Spot.Center },
+                $(go.Shape, "Circle",
+                    { 
+                        width: 60, 
+                        height: 60,
+                        fill: new go.Brush("Radial", {
+                            0: "#66BB6A",
+                            1: "#388E3C"
+                        }),
+                        stroke: "#2E7D32",
+                        strokeWidth: 3
+                    }
+                ),
+                $(go.TextBlock, "CPS",
+                    { 
+                        font: "bold 12px Arial",
+                        stroke: "white",
+                        alignment: go.Spot.Center,
+                        margin: new go.Margin(-35, 0, 0, 0)
+                    }
+                ),
+                $(go.TextBlock,
+                    { 
+                        font: "bold 12px Arial",
+                        margin: new go.Margin(5, 2, 2, 2),
+                        textAlign: "center"
+                    },
+                    new go.Binding("text", "name")
+                )
+            )
+        );
+
+// Template Tank Farm
+myDiagram.nodeTemplateMap.add("TankFarm",
+    $(go.Node, "Vertical",
+        { locationSpot: go.Spot.Center },
+        
+        // Ganti Circle dengan icon PNG
+        $(go.Picture, "Asset/Dumai_tank.png",  // path ke file PNG kamu
+            { 
+                width: 80, 
+                height: 80,
+                imageStretch: go.GraphObject.Uniform // biar proporsional
+            }
         ),
+
         $(go.TextBlock,
-          { font: "bold 11px sans-serif", stroke: "white", margin: 6, textAlign: "center" },
-          new go.Binding("text", "percent", p => (+p).toFixed(2) + "%")
+            { 
+                font: "bold 12px Arial",
+                stroke: "black",
+                margin: 5,
+                textAlign: "center",
+                wrap: go.TextBlock.WrapFit,
+                width: 70,
+                alignment: go.Spot.Center,
+                alignmentFocus: go.Spot.Center
+            },
+            new go.Binding("text", "name")
         )
-      );
+    )
+);
+
+
+        // Template untuk junction points
+        myDiagram.nodeTemplateMap.add("Junction",
+            $(go.Node,
+                { locationSpot: go.Spot.Center },
+                $(go.Shape, "Circle",
+                    { width: 8, height: 8, fill: "#333", stroke: null })
+            )
+        );
+
+        // Link style yang lebih rapi
+        myDiagram.linkTemplate =
+            $(go.Link,
+                { 
+                    routing: go.Link.Orthogonal,
+                    corner: 0,
+                    selectable: false,
+                    layerName: "Background"
+                },
+                $(go.Shape, { 
+                    strokeWidth: 4, 
+                    stroke: "#333"
+                }),
+                new go.Binding("toArrow", "arrow")
+            );
+
+        // Data model dengan posisi yang disesuaikan untuk layout rapi
+        myDiagram.model = new go.GraphLinksModel(
+            [
+                // Top row - Gas Stations (level 1)
+                { key: "pinang", category: "GS", name: "Pinang GS", percentage: "89.58%", anomalyCount: "3", color: "#FFEB3B", loc: "-500 -300" },
+                { key: "bangko", category: "GS", name: "Bangko GS", percentage: "89.29%", anomalyCount: "3", color: "#FFEB3B", loc: "-400 -300" },
+                { key: "seruni", category: "GS", name: "Seruni GS", percentage: "80.00%", anomalyCount: "3", color: "#FFEB3B", loc: "-300 -300" },
+                { key: "sintong", category: "GS", name: "Sintong GS", percentage: "75.00%", anomalyCount: "6", color: "#FF9800", loc: "-180 -300" },
+                { key: "pager", category: "GS", name: "Pager GS", percentage: "93.13%", anomalyCount: "1", color: "#4CAF50", loc: "-70 -300" },
+                { key: "benar", category: "GS", name: "Benar GS", percentage: "90.44%", anomalyCount: "2", color: "#4CAF50", loc: "30 -300" },
+                { key: "rantau", category: "GS", name: "Rantau Bais GS", percentage: "76.56%", anomalyCount: "6", color: "#FF9800", loc: "150 -300" },
+
+                // Second row - Gas Stations (level 2)
+                { key: "meno", category: "GS", name: "MeNo GS", percentage: "85.00%", anomalyCount: "2", color: "#FFEB3B", loc: "-450 -50" },
+                { key: "meso", category: "GS", name: "MeSo GS", percentage: "82.81%", anomalyCount: "3", color: "#FFEB3B", loc: "-350 -50" },
+                { key: "puncak", category: "GS", name: "Puncak GS", percentage: "88.89%", anomalyCount: "1", color: "#FFEB3B", loc: "-10 -50" },
+                { key: "pemburu", category: "GS", name: "Pemburu GS", percentage: "97.73%", anomalyCount: "0", color: "#4CAF50", loc: "90 -50" },
+
+                // CPS Duri - Central processing
+                { key: "cps", category: "CPS", name: "Duri", loc: "263 138" },
+
+                // Third row - Gas Stations (level 3)
+                { key: "ampuh", category: "GS", name: "Ampuh GS", percentage: "77.78%", anomalyCount: "2", color: "#FF5722", loc: "-500 150" },
+                { key: "rangau", category: "GS", name: "Rangau GS", percentage: "68.75%", anomalyCount: "0", color: "#FF5722", loc: "-400 150" },
+                { key: "petani", category: "GS", name: "Petani GS", percentage: "70.19%", anomalyCount: "2", color: "#FF5722", loc: "-300 150" },
+                { key: "pematang", category: "GS", name: "Pematang GS", percentage: "91.45%", anomalyCount: "1", color: "#4CAF50", loc: "-190 150" },
+                { key: "bekasap", category: "GS", name: "Bekasap GS", percentage: "70.14%", anomalyCount: "3", color: "#FF5722", loc: "-80 150" },
+
+                // Bottom row - Gas Stations (level 4)
+                { key: "intan", category: "GS", name: "Intan GS", percentage: "66.35%", anomalyCount: "5", color: "#FF5722", loc: "100 300" },
+                { key: "pungut", category: "GS", name: "Pungut GS", percentage: "89.29%", anomalyCount: "2", color: "#FFEB3B", loc: "200 300" },
+                { key: "tandun", category: "GS", name: "Tandun GS", percentage: "94.44%", anomalyCount: "0", color: "#4CAF50", loc: "300 300" },
+                { key: "libo", category: "GS", name: "Libo GS", percentage: "77.94%", anomalyCount: "2", color: "#FF5722", loc: "400 300" },
+
+                // Tank Farm
+                { key: "tankfarm", category: "TankFarm", name: "Dumai Tank Farm", loc: "450 -153" },
+
+                // Junction points untuk pipeline yang rapi dan terorganisir
+                { key: "branch_1", category: "Junction", loc: "-310 -100" },     // Branch untuk Pinang-Bangko
+                { key: "branch_1_2", category: "Junction", loc: "-360 -80" },     // Branch untuk Pinang-Bangko
+                { key: "branch_2", category: "Junction", loc: "-30 -100" },      // Branch untuk Seruni-Sintong  
+                { key: "branch_3", category: "Junction", loc: "225 -100" },      // Branch untuk Pager-Benar
+                { key: "cps_collect", category: "Junction", loc: "180 175" },    // Collector untuk CPS group
+                { key: "bottom_1", category: "Junction", loc: "-360 350" },      // Collector untuk Ampuh-Petani
+                { key: "bottom_1_2", category: "Junction", loc: "-95 350" },      // Collector untuk Ampuh-Petani
+                { key: "bottom_2", category: "Junction", loc: "190 250" },        // Collector untuk Pematang-Bekasap
+                { key: "bottom_2_2", category: "Junction", loc: "390 250" },        // Collector untuk Pematang-Bekasap
+                { key: "bottom_2_3", category: "Junction", loc: "290 250" },        // Collector untuk Pematang-Bekasap
+            ],
+            [
+                // GROUP 1: Pipeline yang langsung ke Tank Farm
+                // Top row ke branch collectors
+                { from: "pinang", to: "bangko" },
+                { from: "bangko", to: "branch_1" },
+                { from: "sintong", to: "branch_2" },
+                { from: "pager", to: "branch_2" },
+                { from: "benar", to: "branch_2" },
+                { from: "rantau", to: "branch_3" },
+                { from: "puncak", to: "pemburu" },
+
+                
+                // Branch collectors ke middle level
+                { from: "branch_1", to: "seruni" },
+                { from: "branch_1_2", to: "meno" },
+                { from: "branch_1_2", to: "meso" },
+                { from: "branch_3", to: "pemburu" },
+                { from: "branch_1", to: "branch_2" },
+                { from: "branch_1_2", to: "branch_2" },
+                { from: "branch_2", to: "branch_3" },
+                { from: "branch_3", to: "tankfarm" },
+                
+                // Main collectors ke main pipeline
+                { from: "collect_1", to: "main_line" },
+                { from: "collect_2", to: "main_line" },
+
+                // GROUP 2: Pipeline yang ke CPS Duri
+                // Bottom level ke collectors
+                { from: "ampuh", to: "bottom_1" },
+                { from: "rangau", to: "bottom_1" },
+                { from: "petani", to: "bottom_1" },
+                { from: "pematang", to: "bottom_1_2" },
+                { from: "bekasap", to: "bottom_1_2" },
+                
+                // Final row ke final collector
+                { from: "intan", to: "bottom_2" },
+                { from: "pungut", to: "bottom_2" },
+                { from: "tandun", to: "bottom_2_2" },
+                { from: "libo", to: "bottom_2_2" },
+                
+                // All bottom collectors ke CPS collector
+                { from: "bottom_1", to: "bottom_1_2" },
+                { from: "bottom_1_2", to: "cps_collect" },
+                { from: "bottom_2", to: "bottom_2_3" },
+                { from: "bottom_2_2", to: "bottom_2_3" },
+                { from: "bottom_2_3", to: "cps" },
+                
+                // CPS collector ke CPS
+                { from: "cps_collect", to: "cps" },
+                
+                // CPS ke Tank Farm
+                { from: "cps", to: "tankfarm", arrow: "Standard" }
+            ]
+        );
+
+        // Set positions manually
+        myDiagram.nodes.each(function (n) {
+            var d = n.data;
+            if (d.loc) n.position = go.Point.parse(d.loc);
+        });
     }
 
-    const GSTemplate =
-      $(go.Node, "Vertical",
-        { locationSpot: go.Spot.Center, selectionAdorned: false },
-        $(go.Panel, "Horizontal",
-          $(go.Shape, "TriangleUp", { width: 14, height: 14, fill: "#777", stroke: null, margin: 2 }),
-          $(go.TextBlock, { font: "bold 12px sans-serif", margin: new go.Margin(0,0,0,4) },
-            new go.Binding("text", "name"))
-        ),
-        $(go.Picture, { width: 24, height: 24, margin: 2 },
-            new go.Binding("source", "icon")),
-        $(go.TextBlock, { font: "10px sans-serif", stroke: "#555" },
-          new go.Binding("text", "anoms", n => n + " Total Anomalies")),
-        PercentPanel(),
-        new go.Binding("position", "loc", go.Point.parse).makeTwoWay(go.Point.stringify)
-      );
-
-    const StationTemplate =
-      $(go.Node, "Vertical",
-        { locationSpot: go.Spot.Center, selectionAdorned: false },
-        $(go.Shape, "Circle", { width: 42, height: 42, fill: "#90caf9", stroke: "#1565c0", strokeWidth: 1.2 }),
-        $(go.TextBlock, { font: "bold 11px sans-serif", margin: 4 },
-            new go.Binding("text", "name")),
-        $(go.Picture, { width: 24, height: 24, margin: 2 },
-            new go.Binding("source", "icon")),
-        new go.Binding("position", "loc", go.Point.parse).makeTwoWay(go.Point.stringify)
-      );
-
-    const JunctionTemplate =
-      $(go.Node, "Vertical",
-        { locationSpot: go.Spot.Center, selectable: false },
-        $(go.Shape, "Circle", { width: 8, height: 8, fill: "black", stroke: null }),
-        $(go.Picture, { width: 24, height: 24, margin: 2 },
-            new go.Binding("source", "icon")),
-        new go.Binding("position", "loc", go.Point.parse)
-      );
-
-    diagram.nodeTemplateMap.add("GS", GSTemplate);
-    diagram.nodeTemplateMap.add("Station", StationTemplate);
-    diagram.nodeTemplateMap.add("Junction", JunctionTemplate);
-
-    diagram.linkTemplate = $(go.Link, {
-        routing: go.Link.AvoidsNodes,
-        corner: 8,
-        toShortLength: 3,
-        selectable: false
-      },
-      $(go.Shape, { strokeWidth: 4, stroke: "#333" }),
-      $(go.Shape, { toArrow: "Standard", stroke: null, fill: "#333" })
-    );
-
-    const nodes = [
-      { key: "pinang", category: "GS", name: "Pinang GS", anoms: 1, percent: 89.58, icon: "./asset/tank.png", loc: "-720 -300" },
-      { key: "bangko", category: "GS", name: "Bangko GS", anoms: 1, percent: 89.29, icon: "./asset/tank.png", loc: "-540 -300" },
-      { key: "seruni", category: "GS", name: "Seruni GS", anoms: 3, percent: 80.00, icon: "./asset/tank.png", loc: "-360 -300" },
-      { key: "sintong", category: "GS", name: "Sintong GS", anoms: 3, percent: 75.00, icon: "./asset/tank.png", loc: "-180 -300" },
-      { key: "pager", category: "GS", name: "Pager GS", anoms: 1, percent: 93.13, icon: "./asset/tank.png", loc: "  20 -300" },
-      { key: "benar", category: "GS", name: "Benar GS", anoms: 2, percent: 90.44, icon: "./asset/tank.png", loc: " 200 -300" },
-      { key: "rantau", category: "GS", name: "Rantau Bais GS", anoms: 2, percent: 76.56, icon: "./asset/tank.png", loc: " 380 -300" },
-      { key: "dumai", category: "Station", name: "Dumai Tank Farm", icon: "./Asset/DumaiTankFarm.png", loc: " 720 -280" },
-
-      { key: "meno", category: "GS", name: "MeNo GS", anoms: 2, percent: 85.00, icon: "./asset/tank.png", loc: "-480 -100" },
-      { key: "meso", category: "GS", name: "MeSo GS", anoms: 2, percent: 82.81, icon: "./asset/tank.png", loc: "-360 -100" },
-      { key: "puncak", category: "GS", name: "Puncak GS", anoms: 1, percent: 88.89, icon: "./asset/tank.png", loc: "  80 -100" },
-      { key: "pemburu", category: "GS", name: "Pemburu GS", anoms: 0, percent: 97.73, icon: "./asset/tank.png", loc: " 260 -100" },
-
-      { key: "cps", category: "Station", name: "CPS Duri", icon: "./asset/cps-duri.svg", loc: " 220  80" },
-
-      { key: "ampuh", category: "GS", name: "Ampuh GS", anoms: 2, percent: 77.78, icon: "./asset/tank.png", loc: "-720  260" },
-      { key: "rangau", category: "GS", name: "Rangau GS", anoms: 0, percent: 68.75, icon: "./asset/tank.png", loc: "-540  260" },
-      { key: "petani", category: "GS", name: "Petani GS", anoms: 2, percent: 70.19, icon: "./asset/tank.png", loc: "-360  260" },
-      { key: "pematang", category: "GS", name: "Pematang GS", anoms: 1, percent: 91.45, icon: "./asset/tank.png", loc: "-160  260" },
-      { key: "bekasap", category: "GS", name: "Bekasap GS", anoms: 3, percent: 70.14, icon: "./asset/tank.png", loc: "  40  260" },
-
-      { key: "intan", category: "GS", name: "Intan GS", anoms: 5, percent: 66.35, icon: "./asset/tank.png", loc: " 260  260" },
-      { key: "pungut", category: "GS", name: "Pungut GS", anoms: 2, percent: 89.29, icon: "./asset/tank.png", loc: " 460  260" },
-      { key: "tandum", category: "GS", name: "Tandun GS", anoms: 0, percent: 94.44, icon: "./asset/tank.png", loc: " 640  260" },
-      { key: "libo", category: "GS", name: "Libo GS", anoms: 2, percent: 77.94, icon: "./asset/tank.png", loc: " 820  260" },
-
-      { key: "j1", category: "Junction", loc: "-450 -220" }, 
-      { key: "j2", category: "Junction", loc: " 500 -220" }, 
-      { key: "j3", category: "Junction", loc: " 720   60" }, 
-      { key: "j4", category: "Junction", loc: "  80 -220" }, 
-      { key: "j5", category: "Junction", loc: " 220   160" }, 
-      { key: "j6", category: "Junction", loc: " -80  160" }, 
-      { key: "j7", category: "Junction", loc: " 480  160" }  
-    ];
-
-    const links = [
-      { from: "pinang", to: "bangko" },
-      { from: "bangko", to: "seruni" },
-      { from: "seruni", to: "sintong" },
-      { from: "sintong", to: "pager" },
-      { from: "pager", to: "benar" },
-      { from: "benar", to: "rantau" },
-      { from: "rantau", to: "j2" },
-      { from: "j2", to: "dumai" },
-
-      { from: "seruni", to: "j1" },
-      { from: "j1", to: "meno" },
-      { from: "meno", to: "meso" },
-
-      { from: "benar", to: "j4" },
-      { from: "j4", to: "puncak" },
-      { from: "puncak", to: "pemburu" },
-      { from: "pemburu", to: "j5" },
-      { from: "j5", to: "cps" },
-
-      { from: "ampuh", to: "rangau" },
-      { from: "rangau", to: "petani" },
-      { from: "petani", to: "pematang" },
-      { from: "pematang", to: "bekasap" },
-      { from: "bekasap", to: "j6" },
-      { from: "j6", to: "cps" },
-
-      { from: "cps", to: "j7" },
-      { from: "j7", to: "intan" },
-      { from: "intan", to: "pungut" },
-      { from: "pungut", to: "tandum" },
-      { from: "tandum", to: "libo" },
-
-      { from: "libo", to: "j3" },
-      { from: "j3", to: "dumai" }
-    ];
-
-    diagram.model = new go.GraphLinksModel(nodes, links);
-
-  })();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 </script>

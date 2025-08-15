@@ -1,0 +1,109 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\obj\\Debug\\net8.0\\compressed\\00j3uxougx.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\obj\\Debug\\net8.0\\scopedcss\\bundle\\PipingDiagramApp.styles.css",
+      "PackagePath": "staticwebassets\\PipingDiagramApp.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\DumaiTankFarm.svg",
+      "PackagePath": "staticwebassets\\Asset\\DumaiTankFarm.svg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\Dumai_tank.png",
+      "PackagePath": "staticwebassets\\Asset\\Dumai_tank.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\analysis.png",
+      "PackagePath": "staticwebassets\\Asset\\analysis.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\cps-duri.svg",
+      "PackagePath": "staticwebassets\\Asset\\cps-duri.svg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\factory.png",
+      "PackagePath": "staticwebassets\\Asset\\factory.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\nbs.svg",
+      "PackagePath": "staticwebassets\\Asset\\nbs.svg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\oil-tank.png",
+      "PackagePath": "staticwebassets\\Asset\\oil-tank.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\oil.png",
+      "PackagePath": "staticwebassets\\Asset\\oil.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\pipe.png",
+      "PackagePath": "staticwebassets\\Asset\\pipe.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\previous.png",
+      "PackagePath": "staticwebassets\\Asset\\previous.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\Asset\\tank.svg",
+      "PackagePath": "staticwebassets\\Asset\\tank.svg"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "C:\\Users\\ASUS\\OneDrive\\Documents\\Project1\\diagram\\wwwroot\\scripts\\diagram.js",
+      "PackagePath": "staticwebassets\\scripts\\diagram.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PipingDiagramApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.PipingDiagramApp.props",
+      "PackagePath": "build\\PipingDiagramApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PipingDiagramApp.props",
+      "PackagePath": "buildMultiTargeting\\PipingDiagramApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.PipingDiagramApp.props",
+      "PackagePath": "buildTransitive\\PipingDiagramApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

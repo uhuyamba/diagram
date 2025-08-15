@@ -20,7 +20,18 @@
         // Template untuk GS (active)
         myDiagram.nodeTemplateMap.add("GS",
             $(go.Node, "Vertical",
-                { locationSpot: go.Spot.Center },
+                {
+                    locationSpot: go.Spot.Center,
+                    click: function (e, obj) {
+                        const nodeData = obj.part.data;
+                        let urlName = nodeData.name
+                            .toLowerCase()
+                            .replace(/\s+/g, '') 
+                            .replace(/[^a-z0-9]/g, ''); 
+
+                        window.location.href = `/home/sls/${urlName}`;
+                    }
+                },
                 $(go.Picture,
                     { width: 50, height: 50, margin: 2 },
                     new go.Binding("source", "icon")),
